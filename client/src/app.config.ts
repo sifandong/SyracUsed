@@ -1,6 +1,11 @@
 export default {
   pages: [
-    'pages/index/index'
+    'pages/index/index',
+    'pages/hunt/index',
+    'pages/market/index',
+    'pages/wishlist/index',
+    'pages/myItems/index'
+
   ],
   window: {
     backgroundTextStyle: 'light',
