@@ -23,7 +23,7 @@
 // export default App
 
 import React, { useEffect } from "react";
-
+import 'taro-ui/dist/style/index.scss'
 // Taro 额外添加的 hooks 要从 '@tarojs/taro' 中引入
 import { useDidShow, useDidHide } from "@tarojs/taro";
 

@@ -3,15 +3,16 @@ import { View, Text } from "@tarojs/components";
 import { axios } from "taro-axios";
 
 import { IRequestedItem } from "interfaces/interfaces";
-import Requesteditemcard from "../../components/RequestedItemCard";
+import RequestedItemCard from "../../components/RequestedItemCard";
+import urls from "../../constants/url";
 
-const serverUrl = "http://localhost:8080/api";
+const path = urls.myWishlistUrl
 
 const Wishlist: FC = (): ReactElement => {
-  const [requestedItems, setRequestedItems] = useState<IRequestedItem[]>([]);
+  const [wishlist, setWishlist] = useState<IRequestedItem[]>([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(serverUrl + "/requestedItems", {
+      const response = await axios.get(path, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -19,20 +20,19 @@ const Wishlist: FC = (): ReactElement => {
       console.log(response);
       console.log(response.data);
 
-      setRequestedItems(response.data);
+      setWishlist(response.data);
     }
     fetchData();
-  }, [serverUrl]);
-  console.log("asd");
+  }, [path]);
+  
 
-  console.log(requestedItems);
-  console.log(requestedItems.length);
+  console.log(wishlist);
 
   return (
     <View>
-      {requestedItems.map((requestedItem: IRequestedItem, index: number) => {
+      {wishlist.map((requestedItem: IRequestedItem, index: number) => {
         return (
-          <Requesteditemcard
+          <RequestedItemCard
             key={requestedItem.id}
             requestedItem={requestedItem}
           />
