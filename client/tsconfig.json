@@ -13,7 +13,7 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "rootDir": ".",
     "jsx": "react-jsx",
     "allowJs": true,
@@ -22,7 +22,7 @@
       "node_modules/@types"
     ]
   },
-  "include": ["./src", "global.d.ts"],
+  "include": ["src", "global.d.ts"],
   "exclude": [
     "node_modules",
     "dist"
