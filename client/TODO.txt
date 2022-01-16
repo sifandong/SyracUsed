@@ -1,0 +1,2 @@
+1. wishlist index页面的AtSwipeAction的事件还没有定义
+2. sellingItems stuffs
