@@ -1,4 +1,4 @@
-import { Swiper, SwiperItem, View } from "@tarojs/components";
+import { Swiper, SwiperItem, View, Image } from "@tarojs/components";
 import React, { FC, ReactElement } from "react";
 
 import { ISellingItem } from "interfaces/interfaces";
@@ -22,18 +22,18 @@ const SellingItemCard: FC<IProps> = ({ sellingItem }): ReactElement => {
         autoplay
       >
         <SwiperItem>
-          <View>1</View>
+          <View> <Image src={require('../../tem_images/2.jpg')}/> </View>
         </SwiperItem>
         <SwiperItem>
-          <View>2</View>
+          <View> <Image src={require('../../tem_images/4.jpg')}/> </View>
         </SwiperItem>
         <SwiperItem>
-          <View>3</View>
+          <View> <Image src={require('../../tem_images/1.jpg')}  /> </View>
         </SwiperItem>
       </Swiper>
-      <View>{price}</View>
+      <View>{price} {isDollar && '$'} {!isDollar && 'rmb'}</View>
       <View>{description}</View>
-      <View>{seller.nickname}</View>
+      
     </View>
   );
 };
