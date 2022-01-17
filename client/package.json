@@ -35,6 +35,7 @@
   ],
   "author": "",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/runtime": "^7.7.7",
     "@tarojs/components": "3.3.19",
     "@tarojs/react": "3.3.19",
@@ -63,5 +64,4 @@
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "typescript": "^4.1.0"
   }
-  
 }

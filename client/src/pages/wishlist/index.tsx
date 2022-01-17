@@ -1,19 +1,28 @@
-import { FC, ReactElement, useEffect, useState } from "react";
-import { View, Text } from "@tarojs/components";
+import { FC, ReactElement, useCallback, useEffect, useState } from "react";
+import { View, Text, Button, Input } from "@tarojs/components";
 import { axios } from "taro-axios";
 
 import { IRequestedItem } from "interfaces/interfaces";
-import RequestedItemCard from "../../components/RequestedItemCard";
+
 import urls from "../../constants/url";
 import { AtList, AtListItem, AtSwipeAction } from "taro-ui";
 
-const path = urls.myWishlistUrl;
+import AddWishlistItem from "../../components/AddWishlistItem";
+
+const fetchWishlistPath = urls.myWishlistUrl;
+const addWishlistItemPath = urls.addWishlistItemUrl;
 
 const Wishlist: FC = (): ReactElement => {
   const [wishlist, setWishlist] = useState<IRequestedItem[]>([]);
+  const [hide, setHide] = useState<boolean>(true);
+
+  const addWishlist = useCallback((requestedItem: IRequestedItem) => {
+    setWishlist((wishlist) => [...wishlist, requestedItem]);
+  }, []);
+
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(path, {
+      const response = await axios.get(fetchWishlistPath, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -24,26 +33,26 @@ const Wishlist: FC = (): ReactElement => {
       setWishlist(response.data);
     }
     fetchData();
-  }, [path]);
+  }, [fetchWishlistPath]);
+
+  const handleClickAdd = () => {
+    setHide(!hide);
+  };
 
   console.log(wishlist);
   const handleSingle = () => {};
   return (
     <View>
-      {/* {wishlist.map((requestedItem: IRequestedItem, index: number) => {
-        return (
-          <RequestedItemCard
-            key={requestedItem.id}
-            requestedItem={requestedItem}
-          />
-        );
-      })} */}
+      <View>
+        <Button onClick={handleClickAdd}>添加</Button>
+        {!hide && <AddWishlistItem addWishlist={addWishlist} />}
+      </View>
 
       <AtList>
         {wishlist.map((item, index) => (
           <AtSwipeAction
             key={index}
-            autoClose = {true}
+            autoClose={true}
             onOpened={handleSingle}
             isOpened={false}
             options={[
