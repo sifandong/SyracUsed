@@ -23,8 +23,8 @@ public class RequestedItemController {
         return requestedItemService.getAllRequestedItems();
     }
 
-    @GetMapping("/requestedItem/{id}")
-    public RequestedItemData getRequestedItemById(final @PathVariable Long id) {
+    @GetMapping("/requestedItem")
+    public RequestedItemData getRequestedItemById(@RequestParam(value = "id") Long id) {
         return requestedItemService.getRequestedItemById(id);
     }
 

@@ -44,7 +44,7 @@ const Index: FC = (): ReactElement => {
   }
   const handleClickMyItems = ()=>{
     Taro.navigateTo({
-      url: '/pages/myItems/index'
+      url: '/pages/addSellingItem/index'
     }).then(response =>{
       console.log(response);
       

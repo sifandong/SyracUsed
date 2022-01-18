@@ -23,8 +23,8 @@ public class SellingItemController {
         return sellingItemService.getAllSellingItems();
     }
 
-    @GetMapping("/sellingItem/{id}")
-    public SellingItemData getSellingItemById(final @PathVariable Long id) {
+    @GetMapping("/sellingItem")
+    public SellingItemData getSellingItemById(@RequestParam(value = "id") Long id) {
         return sellingItemService.getSellingItemById(id);
     }
 

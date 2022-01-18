@@ -9,7 +9,9 @@ const urls = {
     mySellingItemsUrl: serverUrl + "/user/sellingItems/6",  // 6 is the id for the test
     myWishlistUrl: serverUrl + "/user/requestedItems/2",    // 2 is the id for the test
     addWishlistItemUrl: serverUrl + "/requestedItem",
-    allSellingItemsUrl: serverUrl + "/sellingItems"
+    allSellingItemsUrl: serverUrl + "/sellingItems",
+    sellingItemDetailUrl: serverUrl+"/sellingItem",
+    addSellingItemUrl: serverUrl + "/sellingItem"
 }
 
 
