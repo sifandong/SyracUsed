@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "requested_items")
-public class RequestedItem {
+public class RequestedItem extends Auditable<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

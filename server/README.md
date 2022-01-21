@@ -12,7 +12,10 @@ CREATE TABLE users (
     nickname VARCHAR(20),
     lat DOUBLE(11,7),
     lng DOUBLE(11,7),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    created_date VARCHAR(255),
+    last_modified_date VARCHAR(255)
+
 
 );
 
@@ -24,7 +27,9 @@ CREATE TABLE selling_items (
     description VARCHAR(255),
     is_deliverable BIT,
     PRIMARY KEY (id),
-    FOREIGN KEY (seller_id) REFERENCES users(id)
+    FOREIGN KEY (seller_id) REFERENCES users(id),
+    created_date VARCHAR(255),
+    last_modified_date VARCHAR(255)
 );
 
 CREATE TABLE requested_items (
@@ -32,8 +37,10 @@ CREATE TABLE requested_items (
     requester_id INT unsigned,
     description VARCHAR(255),
     PRIMARY KEY (id),
-    FOREIGN KEY (requester_id) REFERENCES users(id)
-);taro-
+    FOREIGN KEY (requester_id) REFERENCES users(id),
+    created_date VARCHAR(255),
+    last_modified_date VARCHAR(255)
+);
 ```
 ```sql
 # test
