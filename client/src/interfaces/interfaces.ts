@@ -29,3 +29,12 @@ export interface IRequestedItems {
 export interface ISellingItems {
     sellingItemList: ISellingItem[]
 }
+
+export interface IFile {
+  url: string;
+  id: number
+}
+
+// export interface IFiles {
+//   files: IFile[]
+// }

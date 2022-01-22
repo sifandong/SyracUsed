@@ -1,4 +1,4 @@
-import { Component, FC, ReactElement, useState } from "react";
+import { Component, FC, ReactElement, useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,8 @@ import {
 import { AtForm } from "taro-ui";
 import axios from "taro-axios";
 import urls from "../../constants/url";
+import UploadImages from "../../components/UploadImages";
+import { IFile } from "interfaces/interfaces";
 
 const addSellingItemPath = urls.addSellingItemUrl;
 const AddSellingItem: FC = (): ReactElement => {
@@ -19,8 +21,16 @@ const AddSellingItem: FC = (): ReactElement => {
   const [isDollar, setIsDollar] = useState<boolean>(true);
   const [description, setDescription] = useState<string>("");
   const [isDeliverable, setIsDeliverable] = useState<boolean>(false);
+  const [files, setFiles] = useState<IFile[]>([] as IFile[]);
 
+  // useEffect(()=>{
+  //   console.log(files);
+  //   console.log('raspberryberry');
+    
+  // },[files]);
   const handleSubmit = (e)=>{
+    console.log(files);
+    console.log('raspberryberry');
     axios.post(addSellingItemPath,{
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -45,8 +55,19 @@ const AddSellingItem: FC = (): ReactElement => {
     console.log(e.detail);
     
   }
+  const setImages = useCallback((fs:IFile[])=>{
+    // console.log(file);
+    
+      setFiles(files => [...fs]);
+  },[])
+
+  
   return (
     <View>
+      <UploadImages 
+        files = {files}
+        setImages={setImages}
+      />
       <Form onSubmit = {handleSubmit} onReset={handleReset}>
         <View>
           <Input

@@ -7,6 +7,7 @@ export default {
     'pages/myItems/index',
     'pages/sellingItemDetail/index',
     'pages/addSellingItem/index',
+    'pages/test/index'
 
   ],
   window: {
