@@ -11,7 +11,8 @@ const urls = {
     addWishlistItemUrl: serverUrl + "/requestedItem",
     allSellingItemsUrl: serverUrl + "/sellingItems",
     sellingItemDetailUrl: serverUrl+"/sellingItem",
-    addSellingItemUrl: serverUrl + "/sellingItem"
+    addSellingItemUrl: serverUrl + "/sellingItem",
+    uploadImagesUrl: serverUrl + "/uploadImages",
 }
 
 

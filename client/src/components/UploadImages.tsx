@@ -6,28 +6,13 @@ import { IFile } from "interfaces/interfaces";
 import AtImagePicker from "taro-ui/lib/components/image-picker";
 
 interface IProps {
-  files: IFile[];
+  filesUrls: IFile[];
   setImages: (fs: IFile[]) => void;
 }
 
-const UploadImages: FC<IProps> = ({ files, setImages }): ReactElement => {
+const UploadImages: FC<IProps> = ({ filesUrls, setImages }): ReactElement => {
   const [showButton, setShowButton] = useState<boolean>(true);
-//   const [current, setCurrent] = useState<IFile[]>([] as IFile[]);
 
-  //   const handleChange = (imgFiles,ope,index) => {
-  //     if(ope === 'remove'){
-  //         files.splice(index,1);
-  //         setFil
-  //     }
-  //     if(files.length > 3){
-  //         setShowButton(false);
-  //     }else{
-  //         setShowButton(true);
-  //     }
-  //     let file = files[files.length-1];
-  //     addFile(file);
-
-  //   };
   const handleChange = (currentFiles) => {
       if(currentFiles.length > 3){
           setShowButton(false);
@@ -54,8 +39,8 @@ const UploadImages: FC<IProps> = ({ files, setImages }): ReactElement => {
       <AtImagePicker
         length={2}
         showAddBtn={showButton}
-        // files={current}
-        files = {files}
+        
+        files = {filesUrls}
         onChange={handleChange}
         onFail={handleFail}
         onImageClick={handleClick}

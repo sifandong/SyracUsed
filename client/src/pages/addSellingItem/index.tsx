@@ -8,28 +8,41 @@ import {
   RadioGroup,
   Form,
   Button,
+  Image
 } from "@tarojs/components";
 import { AtForm } from "taro-ui";
-import axios from "taro-axios";
+import axios, {PostData, FileData} from "taro-axios";
 import urls from "../../constants/url";
 import UploadImages from "../../components/UploadImages";
 import { IFile } from "interfaces/interfaces";
+import Taro from "@tarojs/taro";
 
 const addSellingItemPath = urls.addSellingItemUrl;
+const uploadImagesPath = urls.uploadImagesUrl;
 const AddSellingItem: FC = (): ReactElement => {
   const [price, setPrice] = useState<number>(-1);
   const [isDollar, setIsDollar] = useState<boolean>(true);
   const [description, setDescription] = useState<string>("");
   const [isDeliverable, setIsDeliverable] = useState<boolean>(false);
-  const [files, setFiles] = useState<IFile[]>([] as IFile[]);
+  const [filesUrls, setFilesUrls] = useState<IFile[]>([] as IFile[]);
 
-  // useEffect(()=>{
-  //   console.log(files);
-  //   console.log('raspberryberry');
+
+
+  const [test, setTest] = useState()
+  useEffect(()=>{
+    console.log(filesUrls);
+    console.log('raspberryberry');
+    if(filesUrls.length > 0){
+      let inter = filesUrls[0].url.split('/');
+      console.log(inter);
+      let target = inter[inter.length -1 ].split('.')
+      console.log(target);
+      
+    }
     
-  // },[files]);
+  },[filesUrls]);
   const handleSubmit = (e)=>{
-    console.log(files);
+    console.log(filesUrls);
     console.log('raspberryberry');
     axios.post(addSellingItemPath,{
       headers: {
@@ -58,16 +71,60 @@ const AddSellingItem: FC = (): ReactElement => {
   const setImages = useCallback((fs:IFile[])=>{
     // console.log(file);
     
-      setFiles(files => [...fs]);
+      setFilesUrls(filesUrls => [...fs]);
   },[])
-
+  const handleClick = async ()=>{
+    filesUrls.forEach(fileUrl =>{
+      Taro.uploadFile({
+        url:"http://localhost:8080/api/uploadImages",
+        header:{
+          'content-type': 'multipart/form-data'
+        },
+        name:'file',
+        filePath:fileUrl.url,
+        success: (res)=>{
+          console.log(res.data);
+          
+        }
+      })
+    })
+   
+    
+  }
+  // function process(filesUrls,formData){
+    
+  //   filesUrls.array.forEach(async (element) => {
+  //     let name = obtainName(element);
+  //     let imgBlob = await fetch(element.url).then(r => r.blob());
+  //     let imgFile = new File([imgBlob],name,{
+  //       type: imgBlob.type
+  //     })
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(imgBlob);
+  //     console.log('gggggggggggggggggggggggggg');
+      
+  //     formData.append('file',imgFile)
+      
+  //   });
+  // }
+  // function obtainName(element){
+  //     let inter = element.url.split('/');
+  //     console.log(inter);
+  //     let target = inter[inter.length -1 ].split('.')
+  //     console.log(target);
+  //     return target[0]
+  // }
+  
   
   return (
     <View>
+      
       <UploadImages 
-        files = {files}
+        filesUrls = {filesUrls}
         setImages={setImages}
       />
+      
+      {filesUrls.length > 0 && <Button onClick={handleClick}>提交图片</Button>}
       <Form onSubmit = {handleSubmit} onReset={handleReset}>
         <View>
           <Input
@@ -129,6 +186,11 @@ const AddSellingItem: FC = (): ReactElement => {
         </View>
         <Button formType = 'submit'>提交</Button>
       </Form>
+      {/* <View>
+        { files.length > 0 && <Image 
+          src={files[0].url}
+        />}
+      </View> */}
     </View>
   );
 };
