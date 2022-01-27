@@ -5,7 +5,7 @@ use syracused;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `wishlists`;
-
+DROP TABLE IF EXISTS  `images`;
 
 CREATE TABLE users (
     id INT unsigned NOT NULL AUTO_INCREMENT,
@@ -38,6 +38,18 @@ CREATE TABLE requested_items (
     description VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (requester_id) REFERENCES users(id),
+    created_date VARCHAR(255),
+    last_modified_date VARCHAR(255)
+);
+
+CREATE TABLE images (
+    id INT unsigned NOT NULL AUTO_INCREMENT,
+    path VARCHAR(255),
+    uploader_id INT unsigned,
+    item_id INT unsigned,
+    PRIMARY KEY (id),
+    FOREIGN KEY (uploader_id) REFERENCES users(id),
+    FOREIGN KEY (item_id) REFERENCES selling_items(id),
     created_date VARCHAR(255),
     last_modified_date VARCHAR(255)
 );

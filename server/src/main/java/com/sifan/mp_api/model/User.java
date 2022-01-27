@@ -22,6 +22,9 @@ public class User extends Auditable<String>{
     @OneToMany(mappedBy = "requester", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RequestedItem> requestedItems;
 
+    @OneToMany(mappedBy = "uploader", fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Image> images;
+
     public User() {
 
     }

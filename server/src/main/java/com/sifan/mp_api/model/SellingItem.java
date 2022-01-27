@@ -4,6 +4,7 @@ package com.sifan.mp_api.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "selling_items")
@@ -27,6 +28,9 @@ public class SellingItem extends Auditable<String>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     private User seller;
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Image> images;
 
     public SellingItem(){
 

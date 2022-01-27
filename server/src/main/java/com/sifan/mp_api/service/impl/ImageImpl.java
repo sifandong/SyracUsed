@@ -8,6 +8,7 @@ import com.sifan.mp_api.model.Image;
 import com.sifan.mp_api.model.SellingItem;
 import com.sifan.mp_api.model.User;
 import com.sifan.mp_api.repository.ImageRepository;
+import com.sifan.mp_api.repository.SellingItemRepository;
 import com.sifan.mp_api.repository.UserRepository;
 import com.sifan.mp_api.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,13 @@ public class ImageImpl implements ImageService {
     private ImageRepository imageRepo;
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private SellingItemRepository sellingItemRepo;
+
     @Override
     public ImageData saveImage(ImageData imageData) {
         Image image = populateImageEntity(imageData);
+
         return populateImageData(imageRepo.save(image));
     }
 
@@ -49,24 +54,38 @@ public class ImageImpl implements ImageService {
         });
         return imageDataList;
     }
+    @Override
+    public ImageData updateImage(Long imageId, Long itemId){
+        Image image = imageRepo.getById(imageId);
+        SellingItem item = sellingItemRepo.getById(itemId);
+        image.setItem(item);
+
+        return populateImageData(imageRepo.save(image));
+    }
 
 
     public ImageData populateImageData(final Image image){
         ImageData imageData = new ImageData();
         imageData.setId(image.getId());
         imageData.setPath(image.getPath());
-        imageData.setUploader(populateUserData(image.getUploader()));
-        imageData.setItem(populateSellingItemData(image.getItem()));
-        imageData.setUploaderId();
-        imageData.setItemId();
+        UserData uploaderData = populateUserData(image.getUploader());
+        imageData.setUploader(uploaderData);
+        imageData.setUploaderId(uploaderData.getId());
+        SellingItemData sellingItemData = populateSellingItemData(image.getItem());
+        imageData.setItem(sellingItemData);
+        imageData.setItemId(sellingItemData.getId());
         return imageData;
     }
     public Image populateImageEntity(final ImageData imageData){
         Image image = new Image();
-        image.setId(imageData.getId());
+//        image.setId(imageData.getId());
         image.setPath(imageData.getPath());
-        image.setUploader(populateUserEntity(imageData.getUploader()));
-        image.setItem(populateSellingItemEntity(imageData.getItem()));
+        User uploader = userRepo.getById(imageData.getUploaderId());
+        image.setUploader(uploader);
+        if(imageData.getItemId() != null){
+            SellingItem sellingItem = sellingItemRepo.getById(imageData.getItemId());
+            image.setItem(sellingItem);
+        }
         return image;
     }
 

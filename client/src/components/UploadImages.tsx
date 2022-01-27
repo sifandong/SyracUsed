@@ -8,9 +8,10 @@ import AtImagePicker from "taro-ui/lib/components/image-picker";
 interface IProps {
   filesUrls: IFile[];
   setImages: (fs: IFile[]) => void;
+  
 }
 
-const UploadImages: FC<IProps> = ({ filesUrls, setImages }): ReactElement => {
+const UploadImages: FC<IProps> = ({ filesUrls, setImages, }): ReactElement => {
   const [showButton, setShowButton] = useState<boolean>(true);
 
   const handleChange = (currentFiles) => {

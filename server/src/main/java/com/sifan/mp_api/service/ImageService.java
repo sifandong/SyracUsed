@@ -9,4 +9,5 @@ public interface ImageService {
     boolean deleteImageById(final Long imageId);
     ImageData getImageById(final Long imageId);
     List<ImageData> getAllImages();
+    ImageData updateImage(Long imageId, Long itemId);
 }

@@ -32,8 +32,8 @@ public class ImageData {
     public void setPath(String path) {this.path = path;}
     public void setUploader(UserData uploader) { this.uploader = uploader;}
     public void setItem(SellingItemData item) { this.item = item;}
-    public void setUploaderId() {this.uploaderId = uploader.getId();}
-    public void setItemId() { this.itemId = item.getId();}
+    public void setUploaderId(Long uploaderId) {this.uploaderId = uploaderId;}
+    public void setItemId(Long itemId) { this.itemId = itemId;}
     @Override
     public String toString(){
         return "ImageData: Id: " + id + "path: "+ path+ "uploader: "+ uploader.toString()+ "item: "+ item.toString();

@@ -39,7 +39,14 @@ const Index: FC = (): ReactElement => {
       
     })
   }
-  
+  const handleClickTest = ()=>{
+    Taro.navigateTo({
+      url: '/pages/test/index'
+    }).then(response =>{
+      console.log(response);
+      
+    })
+  }
   return (
     <View>
       <View> 开发小程序第一步 </View>
@@ -47,6 +54,7 @@ const Index: FC = (): ReactElement => {
       <Button onClick = {handleClickWishlist}>愿望单</Button>
       <Button onClick = {handleClickMyItems}>我的物品</Button>
       <Button onClick = {handleClickHunt}>求购</Button>
+      <Button onClick = {handleClickTest}>测试</Button>
     </View>
   );
 };

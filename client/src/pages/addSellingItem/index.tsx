@@ -19,13 +19,14 @@ import Taro from "@tarojs/taro";
 
 const addSellingItemPath = urls.addSellingItemUrl;
 const uploadImagesPath = urls.uploadImagesUrl;
+const updateImagePath = urls.updateImageUrl;
 const AddSellingItem: FC = (): ReactElement => {
   const [price, setPrice] = useState<number>(-1);
   const [isDollar, setIsDollar] = useState<boolean>(true);
   const [description, setDescription] = useState<string>("");
   const [isDeliverable, setIsDeliverable] = useState<boolean>(false);
   const [filesUrls, setFilesUrls] = useState<IFile[]>([] as IFile[]);
-
+  const [imageIds, setImageIds] = useState<number[]>([]);
 
 
   const [test, setTest] = useState()
@@ -52,10 +53,26 @@ const AddSellingItem: FC = (): ReactElement => {
       isDollar: isDollar,
       description: description,
       isDeliverable: isDeliverable,
-      sellerId: 5
+      sellerId: 1
     })
     .then(response =>{
       console.log(response.data);
+      console.log(response.data.id);
+      const itemId = response.data.id;
+      imageIds.forEach(imageId=>{
+        const path = urls.updateImageUrl + `?imageId=${imageId}&itemId=${itemId}`
+        axios.put(path,{
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }).then(res=>{
+          console.log(res);
+          
+        }).catch(err=>{
+          console.log(err);
+          
+        })
+      })
       
     })
     .catch(error =>{
@@ -81,10 +98,15 @@ const AddSellingItem: FC = (): ReactElement => {
           'content-type': 'multipart/form-data'
         },
         name:'file',
+        formData:{
+          'uploaderId': 1
+        },
         filePath:fileUrl.url,
         success: (res)=>{
           console.log(res.data);
-          
+          let json_res = JSON.parse(res.data);
+          console.log(json_res.id);
+          setImageIds(imageIds => [...imageIds,json_res.id]);
         }
       })
     })
@@ -122,6 +144,7 @@ const AddSellingItem: FC = (): ReactElement => {
       <UploadImages 
         filesUrls = {filesUrls}
         setImages={setImages}
+        
       />
       
       {filesUrls.length > 0 && <Button onClick={handleClick}>提交图片</Button>}
