@@ -1,10 +1,10 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { View, Text } from "@tarojs/components";
 
-import SellingItemCard from "../../components/SellingItemCard";
+import SellingItemCard from "../../../../components/SellingItemCard";
 import { ISellingItem } from "interfaces/interfaces";
 import axios from "taro-axios";
-import urls from "../../constants/url";
+import urls from "../../../../constants/url";
 
 const path = urls.mySellingItemsUrl;
 const MyItems: FC = (): ReactElement => {

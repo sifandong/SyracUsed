@@ -1,7 +1,7 @@
 import { Component, FC, ReactElement, useEffect, useState } from 'react'
 import { View, Text, Swiper, SwiperItem, Image} from '@tarojs/components'
 import { ISellingItem } from 'interfaces/interfaces'
-import urls from '../../constants/url'
+import urls from '../../../../constants/url'
 import { useRouter } from '@tarojs/taro'
 import axios from 'taro-axios'
 
@@ -37,13 +37,13 @@ const SellingItemDetail:FC = (): ReactElement=>{
         autoplay
       >
         <SwiperItem>
-          <View> <Image src={require('../../../tem_images/2.jpg')}/> </View>
+          <View> <Image src=''/> </View>
         </SwiperItem>
         <SwiperItem>
-          <View> <Image src={require('../../../tem_images/4.jpg')}/> </View>
+          <View> <Image src=''/> </View>
         </SwiperItem>
         <SwiperItem>
-          <View> <Image src={require('../../../tem_images/1.jpg')}  /> </View>
+          <View> <Image src=''  /> </View>
         </SwiperItem>
       </Swiper>
       <View>{sellingItem.price} {sellingItem.isDollar && '美元'} {!sellingItem.isDollar && '人民币'}</View>

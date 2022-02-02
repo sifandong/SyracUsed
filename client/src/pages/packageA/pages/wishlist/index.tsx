@@ -4,10 +4,10 @@ import { axios } from "taro-axios";
 
 import { IRequestedItem } from "interfaces/interfaces";
 
-import urls from "../../constants/url";
+import urls from "../../../../constants/url";
 import { AtList, AtListItem, AtSwipeAction } from "taro-ui";
 
-import AddWishlistItem from "../../components/AddWishlistItem";
+import AddWishlistItem from "../../../../components/AddWishlistItem";
 
 const fetchWishlistPath = urls.myWishlistUrl;
 const addWishlistItemPath = urls.addWishlistItemUrl;

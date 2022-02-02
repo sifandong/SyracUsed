@@ -5,6 +5,8 @@ import { ISellingItem } from "interfaces/interfaces";
 import axios from "taro-axios";
 import urls from "../../constants/url";
 import SellingItemCard from "../../components/SellingItemCard";
+import { AtTabBar } from "taro-ui";
+import Taro from "@tarojs/taro";
 
 const path = urls.allSellingItemsUrl;
 const Market: FC = (): ReactElement => {

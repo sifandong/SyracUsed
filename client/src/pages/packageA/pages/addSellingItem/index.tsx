@@ -12,8 +12,8 @@ import {
 } from "@tarojs/components";
 import { AtForm } from "taro-ui";
 import axios, {PostData, FileData} from "taro-axios";
-import urls from "../../constants/url";
-import UploadImages from "../../components/UploadImages";
+import urls from "../../../../constants/url";
+import UploadImages from "../../../../components/UploadImages";
 import { IFile } from "interfaces/interfaces";
 import Taro from "@tarojs/taro";
 
