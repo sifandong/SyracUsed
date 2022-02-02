@@ -13,7 +13,8 @@ const urls = {
     sellingItemDetailUrl: serverUrl+"/sellingItem",
     addSellingItemUrl: serverUrl + "/sellingItem",
     uploadImagesUrl: serverUrl + "/uploadImages",
-    updateImageUrl: serverUrl + "/updateImage"
+    updateImageUrl: serverUrl + "/updateImage",
+    deleteRequestedItemUrl: serverUrl + "/requestedItem"
 }
 
 

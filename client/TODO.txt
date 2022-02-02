@@ -1,4 +1,4 @@
-wishlist index页面的AtSwipeAction的事件还没有定义
+wishlist index页面的AtSwipeAction的事件还没有定义 ---------已完成
 各文件格式规范的问题（命名，类型声明，函数的写法）
-文件组织方式（页面和tabbar的关系）
+
 图片展示问题

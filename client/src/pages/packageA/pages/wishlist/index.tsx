@@ -8,10 +8,11 @@ import urls from "../../../../constants/url";
 import { AtList, AtListItem, AtSwipeAction } from "taro-ui";
 
 import AddWishlistItem from "../../../../components/AddWishlistItem";
+import Taro from "@tarojs/taro";
 
 const fetchWishlistPath = urls.myWishlistUrl;
 const addWishlistItemPath = urls.addWishlistItemUrl;
-
+const deleteRequestedItemPath = urls.deleteRequestedItemUrl;
 const Wishlist: FC = (): ReactElement => {
   const [wishlist, setWishlist] = useState<IRequestedItem[]>([]);
   const [hide, setHide] = useState<boolean>(true);
@@ -40,7 +41,10 @@ const Wishlist: FC = (): ReactElement => {
   };
 
   console.log(wishlist);
-  const handleSingle = () => {};
+  // const handleSingle = () => {
+  //   console.log(item.id);
+    
+  // };
   return (
     <View>
       <View>
@@ -53,15 +57,22 @@ const Wishlist: FC = (): ReactElement => {
           <AtSwipeAction
             key={index}
             autoClose={true}
-            onOpened={handleSingle}
+            onOpened={()=>{
+              console.log(item.id);
+              console.log(index);
+              
+              let newWishlist = wishlist.filter(requestedItem => requestedItem.id != item.id)
+              setWishlist(newWishlist);
+              axios.delete(deleteRequestedItemPath+ `/${item.id}`)
+            }}
             isOpened={false}
             options={[
-              {
-                text: "编辑",
-                style: {
-                  backgroundColor: "#6190E8",
-                },
-              },
+              // {
+              //   text: "编辑",
+              //   style: {
+              //     backgroundColor: "#6190E8",
+              //   },
+              // },
               {
                 text: "删除",
                 style: {
